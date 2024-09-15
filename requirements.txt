@@ -2,4 +2,4 @@ fastapi
 pydantic
 google-generativeai
 meta-ai-api
-
+uvicorn
