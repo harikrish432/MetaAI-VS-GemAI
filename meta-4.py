@@ -8,7 +8,7 @@ from meta_ai_api import MetaAI  # Import MetaAI
 app = FastAPI()
 
 # Configure Google Gemini AI
-GOOGLE_GEMINI_API_KEY = "AIzaSyCPx0tHhRYQIFDdwmwa7p754LIiLlGnNA8"
+GOOGLE_GEMINI_API_KEY = "XXXXXXXXX"
 GOOGLE_GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=GOOGLE_GEMINI_API_KEY"
 if not GOOGLE_GEMINI_API_KEY:
     raise ValueError("Google Gemini API key not found. Please set the GOOGLE_GEMINI_API_KEY environment variable.")
