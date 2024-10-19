@@ -8,8 +8,7 @@ from meta_ai_api import MetaAI  # Import MetaAI
 app = FastAPI()
 
 # Configure Google Gemini AI
-#GOOGLE_GEMINI_API_KEY = ""
-GOOGLE_GEMINI_API_KEY = os.getenv("GOOGLE_GEMINI_API_KEY", "")
+GOOGLE_GEMINI_API_KEY = "AIzaSyCPx0tHhRYQIFDdwmwa7p754LIiLlGnNA8"
 GOOGLE_GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=GOOGLE_GEMINI_API_KEY"
 if not GOOGLE_GEMINI_API_KEY:
     raise ValueError("Google Gemini API key not found. Please set the GOOGLE_GEMINI_API_KEY environment variable.")
@@ -126,7 +125,8 @@ async def ask_ai(message: str):
     try:
         # Initial message from the user to Meta AI
         meta_response = meta_ai.prompt(message)
-        meta_response_text = meta_response
+        print(type(meta_response))
+        meta_response_text = meta_response['message']
 
         # Response from Meta AI is sent to Google Gemini AI
         gemini_response = gemini_model.generate_content(f"Respond to the following message: '{meta_response_text}'")
@@ -134,7 +134,7 @@ async def ask_ai(message: str):
 
         # Response from Google Gemini AI is sent back to Meta AI
         final_meta_response = meta_ai.prompt(gemini_response_text)
-        final_meta_response_text = final_meta_response
+        final_meta_response_text = final_meta_response['message']
 
         final_gemini_response = gemini_model.generate_content(f"Respond to the following message: '{final_meta_response_text}'")
         final_gemini_response_text = final_gemini_response.text
